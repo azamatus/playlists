@@ -1,0 +1,7 @@
+index:
+    path: /
+    controller: App\Controller\MusicController::index
+
+music_list:
+    path: /music
+    controller: App\Controller\MusicController::music

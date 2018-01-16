@@ -1,0 +1,19 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+###> symfony/framework-bundle ###
+.env
+.idea/
+/public/bundles/
+/bin/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-pack ###
+/node_modules/
+/public/build/
+###< symfony/webpack-encore-pack ###
+
+###> symfony/web-server-bundle ###
+.web-server-pid
+###< symfony/web-server-bundle ###
