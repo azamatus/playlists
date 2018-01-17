@@ -2,15 +2,15 @@
 
 namespace App\Repository;
 
-use App\Entity\Musics;
+use App\Entity\Tracks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class MusicsRepository extends ServiceEntityRepository
+class TracksRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Musics::class);
+        parent::__construct($registry, Tracks::class);
     }
 
     /*

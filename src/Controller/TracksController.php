@@ -5,23 +5,25 @@
  * Date: 1/16/18
  * Time: 8:46 PM
  */
-
-
 namespace App\Controller;
 
-
-use App\Entity\Musics;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use App\Entity\Tracks;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
-class MusicController extends Controller
+class TracksController extends Controller
 {
 
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+        $tracks = new Tracks();
+        $tracks->setTitle('New title');
+        $tracks->setYear(1223);
+        $em->persist($tracks);
+        $em->flush();
+
         return $this->render('music/list.html.twig', array(
-            'number' => 1,
+            'number' => $tracks->getTitle(),
         ));
     }
 
