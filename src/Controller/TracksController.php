@@ -15,21 +15,21 @@ class TracksController extends Controller
 
     public function index()
     {
-        $em = $this->getDoctrine()->getManager();
-        $tracks = new Tracks();
-        $tracks->setTitle('New title');
-        $tracks->setYear(1223);
-        $em->persist($tracks);
-        $em->flush();
+//        $em = $this->getDoctrine()->getManager();
+//        $tracks = new Tracks();
+//        $tracks->setTitle('New title');
+//        $tracks->setYear(1223);
+//        $em->persist($tracks);
+//        $em->flush();
 
-        return $this->render('music/list.html.twig', array(
-            'number' => $tracks->getTitle(),
+        return $this->render('tracks/list.html.twig', array(
+            'number' => 1,
         ));
     }
 
     public function music()
     {
-        return $this->render('music/list.html.twig', array(
+        return $this->render('tracks/list.html.twig', array(
             'number' => 1,
         ));
     }
