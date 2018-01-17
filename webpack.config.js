@@ -1,5 +1,5 @@
 // webpack.config.js
-var Encore = require('@symfony/webpack-encore');
+let Encore = require('@symfony/webpack-encore');
 
 Encore
 // the project directory where all compiled assets will be stored
@@ -25,6 +25,8 @@ Encore
     // show OS notifications when builds finish/fail
     .enableBuildNotifications()
 
+    //ReactJS
+    .enableReactPreset()
 // create hashed filenames (e.g. app.abc123.css)
 // .enableVersioning()
 ;

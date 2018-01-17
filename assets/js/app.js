@@ -1,8 +1,11 @@
-require('../css/app.scss');
+import React from 'react';
+import ReactDom from 'react-dom';
+import  $ from 'jquery';
+import '../css/app.scss';
 
-let $ = require('jquery');
-
-let greet = require('./greet');
 $(document).ready(function () {
-   $('body').prepend('<h1>' + greet('Aza') + '</h1>');
+   ReactDom.render(
+       <h1 className="react3">From React3</h1>,
+       $('#root')[0]
+   );
 });
