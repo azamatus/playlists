@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import { render } from 'react-dom';
 import '../css/app.scss';
+import Tracks from './tracks';
 
 $(document).ready(function () {
-   ReactDom.render(
-       <h1 className="react3">From React6</h1>,
+   render(
+       <Tracks />,
        $('#root')[0]
    );
 });
