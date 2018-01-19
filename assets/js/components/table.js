@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Table extends React.Component {
+export default class Table extends Component {
     render () {
         return (
           <div className="col-md-9 pull-left">
@@ -44,7 +44,7 @@ export default class Table extends React.Component {
                       </li>
                       <li className="page-item"><a className="page-link" href="#">1</a></li>
                       <li className="page-item"><a className="page-link" href="#">2</a></li>
-                      <li className="page-item active"><a class="page-link" href="#">3</a></li>
+                      <li className="page-item active"><a className="page-link" href="#">3</a></li>
                       <li className="page-item"><a className="page-link" href="#">4</a></li>
                       <li className="page-item"><a className="page-link" href="#">5</a></li>
                       <li className="page-item arrow-margin-right">

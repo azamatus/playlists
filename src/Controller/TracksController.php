@@ -15,16 +15,24 @@ class TracksController extends Controller
 
     public function index()
     {
-//        $em = $this->getDoctrine()->getManager();
-//        $tracks = new Tracks();
-//        $tracks->setTitle('New title');
-//        $tracks->setYear(1223);
-//        $em->persist($tracks);
-//        $em->flush();
-
-        return $this->render('tracks/list.html.twig', array(
-            'number' => 1,
-        ));
+        $tracks = $this->getDoctrine()
+            ->getRepository(Tracks::class)
+            ->findAll();
+//        if ($tracks) {
+//            var_dump('exist');
+//        } else {
+//            var_dump('dont exist');
+//        }
+//        foreach ($tracks as $track) {
+//            var_dump($track->getTitle());
+//        }
+//        die;
+        return $this->render('tracks/list.html.twig', [
+            'tracks' => $tracks,
+            'data1' => 'data1',
+            'data2' => 'data2',
+            'data3' => 'data3'
+        ]);
     }
 
     public function music()
