@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class FilterBar extends React.Component {
+export default class FilterBar extends Component {
     render () {
         return (
             <div className="col-md-3 pull-right">
