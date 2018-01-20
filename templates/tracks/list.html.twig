@@ -5,6 +5,7 @@
         let data_tracks = [];
         {%  for track in tracks  %}
             data_tracks.push({
+                id: '{{ track.id }}',
                 performer: '{{ track.performer }}',
                 title: '{{ track.title }}',
                 genre: '{{ track.genre }}',

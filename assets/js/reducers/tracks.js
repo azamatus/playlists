@@ -6,6 +6,10 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 action.payload
             ];
+        case 'DELETE_TRACK':
+            return state.filter((track) => {
+                return !track.id.includes(action.payload);
+            });
         case 'SORT_TRACKS':
             if (action.payload.sortBy === 'ASC') {
                 if (action.payload.sortTo === 'performer') {

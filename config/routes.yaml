@@ -2,6 +2,6 @@ index:
     path: /
     controller: App\Controller\TracksController::index
 
-music_list:
-    path: /music
-    controller: App\Controller\TracksController::music
+remove_track:
+  path: /remove/
+  controller: App\Controller\TracksController::remove

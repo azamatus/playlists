@@ -27,6 +27,9 @@ class Tracks extends Component {
            sortedTable: true
         });
     }
+    deleteTrack(params) {
+        this.props.onDeleteTrack(params);
+    }
     render () {
         return (
             <div>
@@ -36,6 +39,7 @@ class Tracks extends Component {
                     sortedTable = {this.state.sortedTable}
                     onAddTrack = { (params) => this.addTrack(params) }
                     onSortTracks = {(params) => this.sortTracks(params)}
+                    onDeleteTrack = {(params) => this.deleteTrack(params)}
                 />
                 <FilterBar
                     tracks = {this.props.tracks}
@@ -82,6 +86,12 @@ export default connect(
               type: 'SORT_TRACKS',
               payload
           })
+      },
+      onDeleteTrack: (payload) => {
+          dispatch({
+             type: 'DELETE_TRACK',
+             payload
+          });
       }
   })
 )(Tracks);

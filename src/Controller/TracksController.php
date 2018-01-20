@@ -28,6 +28,7 @@ class TracksController extends Controller
                 $tracks->setYear($params['year']);
                 $em->persist($tracks);
                 $em->flush();
+                $params['id'] = (string)$tracks->getId();
                 $result = [
                     'success' => 1,
                     'message' => 'Saved',
@@ -49,5 +50,27 @@ class TracksController extends Controller
         return $this->render('tracks/list.html.twig', [
             'tracks' => $tracks
         ]);
+    }
+
+    public function remove()
+    {
+        $request = Request::createFromGlobals();
+        if ($request->isMethod('POST')) {
+            $params = $request->request->all();
+            $em = $this->getDoctrine()->getManager();
+            $track = $em->getRepository(Tracks::class)->find($params['track_id']);
+            if (!$track) {
+                return $this->json([
+                   'success' => 0,
+                   'message' => 'Not found'
+                ]);
+            }
+            $em->remove($track);
+            $em->flush();
+            return $this->json([
+               'success' => 1,
+               'message' => 'Removed'
+            ]);
+        }
     }
 }
