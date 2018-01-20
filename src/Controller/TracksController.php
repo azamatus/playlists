@@ -9,25 +9,43 @@ namespace App\Controller;
 
 use App\Entity\Tracks;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class TracksController extends Controller
 {
-
     public function index()
     {
-        $tracks = $this->getDoctrine()
+        $doctrine = $this->getDoctrine();
+        $request = Request::createFromGlobals();
+        if ($request->isMethod('POST')) {
+            $params = $request->request->all();
+            $em = $doctrine->getManager();
+            $tracks = new Tracks();
+            if ($params) {
+                $tracks->setPerformer($params['performer']);
+                $tracks->setTitle($params['title']);
+                $tracks->setGenre($params['genre']);
+                $tracks->setYear($params['year']);
+                $em->persist($tracks);
+                $em->flush();
+                $result = [
+                    'success' => 1,
+                    'message' => 'Saved',
+                    'params' => $params
+                ];
+                return $this->json($result);
+            } else {
+                $result = [
+                    'success' => 0,
+                    'message' => 'No data'
+                ];
+                return $this->json($result);
+            }
+        }
+        $tracks = $doctrine
             ->getRepository(Tracks::class)
             ->findAll();
 
-//        if ($tracks) {
-//            var_dump('exist');
-//        } else {
-//            var_dump('dont exist');
-//        }
-//        foreach ($tracks as $track) {
-//            var_dump($track->getTitle());
-//        }
-//        die;
         return $this->render('tracks/list.html.twig', [
             'tracks' => $tracks
         ]);

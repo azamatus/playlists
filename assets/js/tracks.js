@@ -4,20 +4,20 @@ import Table from './components/table';
 import FilterBar from './components/filterBar';
 
 class Tracks extends Component {
-    addTrack() {
-        console.log('addTrack', this.trackInput.value);
-        this.props.onAddTrack(this.trackInput.value);
-        this.trackInput.value = '';
+    addTrack(params) {
+        this.props.onAddTrack(params);
     }
     findTrack() {
         console.log('findTrack', this.searchInput.value);
         this.props.onFindTrack(this.searchInput.value);
     }
     render () {
-        console.log(this.props.tracks);
         return (
             <div>
-                <Table />
+                <Table
+                    tracks = {this.props.tracks}
+                    onAddTrack = { (params) => this.addTrack(params) }
+                />
                 <FilterBar />
                 <div>
                     <input type="text" ref={(input) => this.trackInput = input} />
@@ -30,7 +30,7 @@ class Tracks extends Component {
                 <ul>
                     {
                         this.props.tracks.map((track, index) =>
-                            <li key={index} > {track.name} </li>
+                            <li key={index} > {track.title} </li>
                         )
                     }
                 </ul>
@@ -44,11 +44,7 @@ export default connect(
       tracks: state.tracks
   }),
   dispatch => ({
-      onAddTrack: (name) => {
-        const payload = {
-          id: Date.now().toString(),
-          name
-        };
+      onAddTrack: (payload) => {
         dispatch({
             type: 'ADD_TRACK',
             payload

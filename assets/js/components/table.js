@@ -8,7 +8,7 @@ export default class Table extends Component {
           <div className="col-md-9 pull-left table-tracks">
               <h4 className="pull-left">Плейлист</h4>
               <button className="btn btn-primary pull-right" data-toggle="modal" data-target="#add-track-modal">Add track</button>
-              <Modal />
+              <Modal onAddTrack = {(params) => this.props.onAddTrack(params) } />
               <table className="table table-striped">
                   <thead>
                   <tr>
@@ -21,8 +21,15 @@ export default class Table extends Component {
                   <tbody>
                   {
                       this.props.tracks ? (
-                          'exist'
-                      )  : (
+                          this.props.tracks.map((track, index) =>
+                              <tr key={index}>
+                                  <td>{ track.performer }</td>
+                                  <td>{ track.title }</td>
+                                  <td>{ track.genre }</td>
+                                  <td>{ track.year }</td>
+                              </tr>
+                          )
+                      ) : (
                           <tr className="text-center"><td colSpan={4}>No tracks</td></tr>
                       )
                   }

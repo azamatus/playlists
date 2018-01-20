@@ -16,7 +16,7 @@ class ModalBody extends Component {
     render() {
         return (
             <div className="modal-body">
-                <AddTrackForm />
+                <AddTrackForm onAddTrack={(params) => this.props.onAddTrack(params)}/>
             </div>
         );
     }
@@ -29,7 +29,7 @@ export default class Modal extends Component {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <ModalHeader title="Добавить трек" />
-                        <ModalBody />
+                        <ModalBody onAddTrack={(params) => this.props.onAddTrack(params)}/>
                     </div>
                 </div>
             </div>

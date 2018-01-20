@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div id="root"></div>
-    <!--suppress JSAnnotator -->
     <script>
-        const data_tracks = {{ tracks|json_encode() }};
+        let data_tracks = [];
+        {%  for track in tracks  %}
+            data_tracks.push({
+                performer: '{{ track.performer }}',
+                title: '{{ track.title }}',
+                genre: '{{ track.genre }}',
+                year: '{{ track.year }}'
+            });
+        {% endfor %}
     </script>
 {% endblock %}
