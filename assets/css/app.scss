@@ -1,9 +1,13 @@
 .table-tracks {
+  overflow-x: auto;
   h4 {
     margin: 0;
   }
   .btn {
     margin: 0 0 15px;
+  }
+  a {
+    text-decoration: none;
   }
   .pagination-container {
     height: 100%;

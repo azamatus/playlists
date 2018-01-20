@@ -6,8 +6,46 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 action.payload
             ];
-        case 'DELETE_TRACK':
-            return state;
+        case 'SORT_TRACKS':
+            if (action.payload.sortBy === 'ASC') {
+                if (action.payload.sortTo === 'performer') {
+                    state.sort((a,b) => {
+                        return (a.performer > b.performer) ? 1 : ((b.performer > a.performer) ? -1 : 0);
+                    });
+                } else if (action.payload.sortTo === 'title') {
+                    state.sort((a,b) => {
+                        return (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0);
+                    });
+                } else if (action.payload.sortTo === 'genre') {
+                    state.sort((a,b) => {
+                        return (a.genre > b.genre) ? 1 : ((b.genre > a.genre) ? -1 : 0);
+                    });
+                } else {
+                    state.sort((a,b) => {
+                        return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);
+                    });
+                }
+                return state;
+            } else {
+                if (action.payload.sortTo === 'performer') {
+                    state.sort((a,b) => {
+                        return (a.performer < b.performer) ? 1 : ((b.performer < a.performer) ? -1 : 0);
+                    });
+                } else if (action.payload.sortTo === 'title') {
+                    state.sort((a,b) => {
+                        return (a.title < b.title) ? 1 : ((b.title < a.title) ? -1 : 0);
+                    });
+                } else if (action.payload.sortTo === 'genre') {
+                    state.sort((a,b) => {
+                        return (a.genre < b.genre) ? 1 : ((b.genre < a.genre) ? -1 : 0);
+                    });
+                } else {
+                    state.sort((a,b) => {
+                        return (a.year < b.year) ? 1 : ((b.year < a.year) ? -1 : 0);
+                    });
+                }
+                return state;
+            }
         default:
             return state;
     }

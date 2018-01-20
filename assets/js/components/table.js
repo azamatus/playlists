@@ -3,6 +3,24 @@ import Modal from './modal';
 
 export default class Table extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            sortBy: 'ASC'
+        }
+    }
+
+    sortClick(e) {
+        const el = $(e.target);
+        const sort = $(el).data('sort');
+        const params = {
+            sortTo: sort,
+            sortBy: this.state.sortBy
+        };
+        this.props.onSortTracks(params);
+        this.state.sortBy === 'ASC' ? this.setState({ sortBy: 'DESC' }) : this.setState({ sortBy: 'ASC' });
+    }
+
     render () {
         return (
           <div className="col-md-9 pull-left table-tracks">
@@ -12,25 +30,40 @@ export default class Table extends Component {
               <table className="table table-striped">
                   <thead>
                   <tr>
-                      <th>Исполнитель</th>
-                      <th>Песня</th>
-                      <th>Жанр</th>
-                      <th>Год</th>
+                      <th><a href="javascript:void(0)" onClick={this.sortClick.bind(this)} data-sort="performer">Исполнитель <i className="fa fa-sort" aria-hidden="true"></i></a></th>
+                      <th><a href="javascript:void(0)" onClick={this.sortClick.bind(this)} data-sort="title">Песня <i className="fa fa-sort" aria-hidden="true"></i></a></th>
+                      <th><a href="javascript:void(0)" onClick={this.sortClick.bind(this)} data-sort="genre">Жанр <i className="fa fa-sort" aria-hidden="true"></i></a></th>
+                      <th><a href="javascript:void(0)" onClick={this.sortClick.bind(this)} data-sort="year">Год <i className="fa fa-sort" aria-hidden="true"></i></a></th>
                   </tr>
                   </thead>
                   <tbody>
                   {
-                      this.props.tracks ? (
-                          this.props.tracks.map((track, index) =>
-                              <tr key={index}>
-                                  <td>{ track.performer }</td>
-                                  <td>{ track.title }</td>
-                                  <td>{ track.genre }</td>
-                                  <td>{ track.year }</td>
-                              </tr>
+                      this.props.sortedTable ? (
+                          this.props.sortedTracks ? (
+                              this.props.sortedTracks.map((track, index) =>
+                                  <tr key={index}>
+                                      <td>{ track.performer }</td>
+                                      <td>{ track.title }</td>
+                                      <td>{ track.genre }</td>
+                                      <td>{ track.year }</td>
+                                  </tr>
+                              )
+                          ) : (
+                              <tr className="text-center"><td colSpan={4}>Треков пока что нету</td></tr>
                           )
-                      ) : (
-                          <tr className="text-center"><td colSpan={4}>No tracks</td></tr>
+                          ) : (
+                          this.props.tracks ? (
+                              this.props.tracks.map((track, index) =>
+                                  <tr key={index}>
+                                      <td>{ track.performer }</td>
+                                      <td>{ track.title }</td>
+                                      <td>{ track.genre }</td>
+                                      <td>{ track.year }</td>
+                                  </tr>
+                              )
+                          ) : (
+                              <tr className="text-center"><td colSpan={4}>Треков пока что нет</td></tr>
+                          )
                       )
                   }
                   </tbody>

@@ -4,18 +4,38 @@ import Table from './components/table';
 import FilterBar from './components/filterBar';
 
 class Tracks extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            sortedTable: false
+        }
+    }
+
     addTrack(params) {
         this.props.onAddTrack(params);
     }
     findTrack(params) {
         this.props.onFindTrack(params);
+        this.setState({
+            sortedTable: false
+        });
+    }
+    sortTracks(params) {
+        this.props.onSortTracks(params);
+        this.setState({
+           sortedTable: true
+        });
     }
     render () {
         return (
             <div>
                 <Table
                     tracks = {this.props.tracks}
+                    sortedTracks = {this.props.sortedTracks}
+                    sortedTable = {this.state.sortedTable}
                     onAddTrack = { (params) => this.addTrack(params) }
+                    onSortTracks = {(params) => this.sortTracks(params)}
                 />
                 <FilterBar
                     tracks = {this.props.tracks}
@@ -41,7 +61,8 @@ export default connect(
                 return track.year.toLowerCase().includes(state.filterTracks.value.toLowerCase());
         }
         return true;
-      })
+      }),
+      sortedTracks: state.tracks
   }),
   dispatch => ({
       onAddTrack: (payload) => {
@@ -51,11 +72,16 @@ export default connect(
         });
       },
       onFindTrack: (payload) => {
-          console.log('on find name', payload);
           dispatch({
              type: 'FIND_TRACK',
              payload
           });
+      },
+      onSortTracks: (payload) => {
+          dispatch({
+              type: 'SORT_TRACKS',
+              payload
+          })
       }
   })
 )(Tracks);
