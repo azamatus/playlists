@@ -8,7 +8,7 @@
                 performer: '{{ track.performer }}',
                 title: '{{ track.title }}',
                 genre: '{{ track.genre }}',
-                year: '{{ track.year }}'
+                year: '{{ track.year|number_format(0, '', '') }}'
             });
         {% endfor %}
     </script>

@@ -7,9 +7,8 @@ class Tracks extends Component {
     addTrack(params) {
         this.props.onAddTrack(params);
     }
-    findTrack() {
-        console.log('findTrack', this.searchInput.value);
-        this.props.onFindTrack(this.searchInput.value);
+    findTrack(params) {
+        this.props.onFindTrack(params);
     }
     render () {
         return (
@@ -18,22 +17,10 @@ class Tracks extends Component {
                     tracks = {this.props.tracks}
                     onAddTrack = { (params) => this.addTrack(params) }
                 />
-                <FilterBar />
-                <div>
-                    <input type="text" ref={(input) => this.trackInput = input} />
-                    <button onClick={this.addTrack.bind(this)}>Add track</button>
-                </div>
-                <div>
-                    <input type="text" ref={(input) => this.searchInput = input} />
-                    <button onClick={this.findTrack.bind(this)}>Find track</button>
-                </div>
-                <ul>
-                    {
-                        this.props.tracks.map((track, index) =>
-                            <li key={index} > {track.title} </li>
-                        )
-                    }
-                </ul>
+                <FilterBar
+                    tracks = {this.props.tracks}
+                    onFindTrack = { (params) => this.findTrack(params) }
+                />
             </div>
         );
     }
@@ -41,7 +28,20 @@ class Tracks extends Component {
 
 export default connect(
   state => ({
-      tracks: state.tracks
+      tracks: state.tracks.filter((track) => {
+        const input = state.filterTracks.name;
+        switch (input) {
+            case 'performer':
+                return track.performer.toLowerCase().includes(state.filterTracks.value.toLowerCase());
+            case 'title':
+                return track.title.toLowerCase().includes(state.filterTracks.value.toLowerCase());
+            case 'genre':
+                return track.genre.toLowerCase().includes(state.filterTracks.value.toLowerCase());
+            case 'year':
+                return track.year.toLowerCase().includes(state.filterTracks.value.toLowerCase());
+        }
+        return true;
+      })
   }),
   dispatch => ({
       onAddTrack: (payload) => {
@@ -50,11 +50,11 @@ export default connect(
             payload
         });
       },
-      onFindTrack: (name) => {
-          console.log('on find name', name);
+      onFindTrack: (payload) => {
+          console.log('on find name', payload);
           dispatch({
              type: 'FIND_TRACK',
-             payload: name
+             payload
           });
       }
   })

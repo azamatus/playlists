@@ -7,7 +7,7 @@ export default class Table extends Component {
         return (
           <div className="col-md-9 pull-left table-tracks">
               <h4 className="pull-left">Плейлист</h4>
-              <button className="btn btn-primary pull-right" data-toggle="modal" data-target="#add-track-modal">Add track</button>
+              <button className="btn btn-primary pull-right" data-toggle="modal" data-target="#add-track-modal">Добавить трек</button>
               <Modal onAddTrack = {(params) => this.props.onAddTrack(params) } />
               <table className="table table-striped">
                   <thead>

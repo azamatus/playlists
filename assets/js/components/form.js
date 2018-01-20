@@ -50,7 +50,7 @@ export default class Form extends Component {
                 </div>
                 <div className="modal-footer" style={{padding: 0}}>
                     <button type="button" className="btn btn-default btn-simple" data-dismiss="modal">Закрыть</button>
-                    <button type="submit" className="btn btn-primary">Сохранить</button>
+                    <button type="submit" className="btn btn-primary btn-simple">Сохранить</button>
                 </div>
             </form>
         );
