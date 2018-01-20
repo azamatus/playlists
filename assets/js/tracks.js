@@ -41,7 +41,6 @@ class Tracks extends Component {
 
 export default connect(
   state => ({
-      // tracks: state.tracks.filter(track => track.name.includes(state.filterTracks))
       tracks: state.tracks
   }),
   dispatch => ({

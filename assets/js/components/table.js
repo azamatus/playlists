@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Modal from './modal';
 
 export default class Table extends Component {
+
     render () {
         return (
-          <div className="col-md-9 pull-left">
-              <h4>Плейлист</h4>
+          <div className="col-md-9 pull-left table-tracks">
+              <h4 className="pull-left">Плейлист</h4>
+              <button className="btn btn-primary pull-right" data-toggle="modal" data-target="#add-track-modal">Add track</button>
+              <Modal />
               <table className="table table-striped">
                   <thead>
                   <tr>
@@ -15,24 +19,13 @@ export default class Table extends Component {
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                      <td>John</td>
-                      <td>Doe</td>
-                      <td>john@example.com</td>
-                      <td>2222</td>
-                  </tr>
-                  <tr>
-                      <td>Mary</td>
-                      <td>Moe</td>
-                      <td>mary@example.com</td>
-                      <td>4444</td>
-                  </tr>
-                  <tr>
-                      <td>July</td>
-                      <td>Dooley</td>
-                      <td>july@example.com</td>
-                      <td>4566</td>
-                  </tr>
+                  {
+                      this.props.tracks ? (
+                          'exist'
+                      )  : (
+                          <tr className="text-center"><td colSpan={4}>No tracks</td></tr>
+                      )
+                  }
                   </tbody>
               </table>
               <div className="pagination-container justify-content-center">

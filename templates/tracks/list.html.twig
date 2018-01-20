@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div id="root" data-event-id="{{ data1 }}" data-event-title="{{ data2 }}" data-event-price="{{ data3 }}"></div>
+    <div id="root"></div>
+    <!--suppress JSAnnotator -->
+    <script>
+        const data_tracks = {{ tracks|json_encode() }};
+    </script>
 {% endblock %}

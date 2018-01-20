@@ -27,6 +27,16 @@ class Tracks
     private $year;
 
     /**
+     * @ORM\Column(type="string", length=256)
+     */
+    private $performer;
+
+    /**
+     * @ORM\Column(type="string", length=256)
+     */
+    private $genre;
+
+    /**
      * @return mixed
      */
     public function getTitle()
@@ -64,5 +74,37 @@ class Tracks
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPerformer()
+    {
+        return $this->performer;
+    }
+
+    /**
+     * @param mixed $performer
+     */
+    public function setPerformer($performer): void
+    {
+        $this->performer = $performer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * @param mixed $genre
+     */
+    public function setGenre($genre): void
+    {
+        $this->genre = $genre;
     }
 }

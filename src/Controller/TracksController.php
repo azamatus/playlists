@@ -18,6 +18,7 @@ class TracksController extends Controller
         $tracks = $this->getDoctrine()
             ->getRepository(Tracks::class)
             ->findAll();
+
 //        if ($tracks) {
 //            var_dump('exist');
 //        } else {
@@ -28,17 +29,7 @@ class TracksController extends Controller
 //        }
 //        die;
         return $this->render('tracks/list.html.twig', [
-            'tracks' => $tracks,
-            'data1' => 'data1',
-            'data2' => 'data2',
-            'data3' => 'data3'
+            'tracks' => $tracks
         ]);
-    }
-
-    public function music()
-    {
-        return $this->render('tracks/list.html.twig', array(
-            'number' => 1,
-        ));
     }
 }

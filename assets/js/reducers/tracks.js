@@ -1,6 +1,4 @@
-const initialState =  [
-];
-
+const initialState =  data_tracks;
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'ADD_TRACK':
