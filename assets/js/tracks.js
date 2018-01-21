@@ -12,6 +12,10 @@ class Tracks extends Component {
         }
     }
 
+    componentDidMount() {
+        $('#loading').remove();
+    }
+
     addTrack(params) {
         this.props.onAddTrack(params);
     }
@@ -30,6 +34,9 @@ class Tracks extends Component {
     deleteTrack(params) {
         this.props.onDeleteTrack(params);
     }
+    showTracks(params) {
+        this.props.onShowTracks(params);
+    }
     render () {
         return (
             <div>
@@ -44,6 +51,8 @@ class Tracks extends Component {
                 <FilterBar
                     tracks = {this.props.tracks}
                     onFindTrack = { (params) => this.findTrack(params) }
+                    totalItems = {this.state.totalItems}
+                    onShowTracks = {(params) => this.showTracks(params)}
                 />
             </div>
         );
@@ -90,6 +99,12 @@ export default connect(
       onDeleteTrack: (payload) => {
           dispatch({
              type: 'DELETE_TRACK',
+             payload
+          });
+      },
+      onShowTracks: (payload) => {
+          dispatch({
+             type: 'SHOW_TRACKS',
              payload
           });
       }

@@ -111,7 +111,7 @@ export default class Table extends Component {
                                       <td>{ track.genre }</td>
                                       <td>{ track.year }</td>
                                       <td>
-                                          <a href="javascript:void(0)" data-test="222" data-id={track.id} onClick={this.openRemoveModal.bind(this)} data-toggle="modal" data-target="#remove-track-modal"><i data-id={track.id} className="fa fa-times" aria-hidden="true"></i></a>
+                                          <a href="javascript:void(0)" data-id={track.id} onClick={this.openRemoveModal.bind(this)} data-toggle="modal" data-target="#remove-track-modal"><i data-id={track.id} className="fa fa-times" aria-hidden="true"></i></a>
                                       </td>
                                   </tr>
                               )
@@ -122,25 +122,7 @@ export default class Table extends Component {
                   }
                   </tbody>
               </table>
-              <div className="pagination-container justify-content-center">
-                  <ul className="pagination pagination-info">
-                      <li className="page-item arrow-margin-left">
-                          <a className="page-link" href="#" aria-label="Previous">
-                              <span aria-hidden="true"><i className="fa fa-angle-double-left" aria-hidden="true"></i></span>
-                          </a>
-                      </li>
-                      <li className="page-item"><a className="page-link" href="#">1</a></li>
-                      <li className="page-item"><a className="page-link" href="#">2</a></li>
-                      <li className="page-item active"><a className="page-link" href="#">3</a></li>
-                      <li className="page-item"><a className="page-link" href="#">4</a></li>
-                      <li className="page-item"><a className="page-link" href="#">5</a></li>
-                      <li className="page-item arrow-margin-right">
-                          <a className="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true"><i className="fa fa-angle-double-right" aria-hidden="true"></i></span>
-                          </a>
-                      </li>
-                  </ul>
-              </div>
+
           </div>
         );
     }

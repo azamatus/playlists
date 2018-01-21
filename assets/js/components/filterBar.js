@@ -36,6 +36,21 @@ export default class FilterBar extends Component {
         this.props.onFindTrack(params);
     }
 
+    showMore(e) {
+        const el = $(e.target);
+        const count = $(el).data('count');
+        const params = {
+            showCount: count
+        };
+        if (count === 10) {
+            $('.pagination-container').show();
+        } else {
+            $('.pagination-container').hide();
+        }
+
+        this.props.onShowTracks(params);
+    }
+
     render () {
         return (
             <div className="col-md-3 pull-right">
@@ -72,6 +87,13 @@ export default class FilterBar extends Component {
                         </select>
                     </div>
                 </form>
+                <div className="show-more">
+                    <h6>Показать</h6>
+                    <a href="javascript:void(0)" data-count="10" onClick={this.showMore.bind(this)}>10</a>
+                    <a href="javascript:void(0)" data-count="25" onClick={this.showMore.bind(this)}>25</a>
+                    <a href="javascript:void(0)" data-count="50" onClick={this.showMore.bind(this)}>50</a>
+                    <a href="javascript:void(0)" data-count="100" onClick={this.showMore.bind(this)}>100</a>
+                </div>
             </div>
         );
     }

@@ -1,10 +1,26 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div id="root"></div>
+    <div style="clear: both;">
+        <div class="pagination-container">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
     <script>
         let data_tracks = [];
-        {%  for track in tracks  %}
+        let all_data_tracks = [];
+        let totalItems = {{ pagination.getTotalItemCount }};
+        {% for track in pagination %}
             data_tracks.push({
+                id: '{{ track.id }}',
+                performer: '{{ track.performer }}',
+                title: '{{ track.title }}',
+                genre: '{{ track.genre }}',
+                year: '{{ track.year|number_format(0, '', '') }}'
+            });
+        {% endfor %}
+        {% for track in tracks %}
+             all_data_tracks.push({
                 id: '{{ track.id }}',
                 performer: '{{ track.performer }}',
                 title: '{{ track.title }}',

@@ -1,4 +1,5 @@
 const initialState =  data_tracks;
+const allTracks = all_data_tracks;
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'ADD_TRACK':
@@ -6,6 +7,10 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 action.payload
             ];
+        case 'SHOW_TRACKS':
+            const count = action.payload.showCount;
+            let new_state = allTracks.slice(0, count);
+            return new_state;
         case 'DELETE_TRACK':
             return state.filter((track) => {
                 return !track.id.includes(action.payload);

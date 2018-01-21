@@ -13,16 +13,10 @@ class TracksRepository extends ServiceEntityRepository
         parent::__construct($registry, Tracks::class);
     }
 
-    /*
-    public function findBySomething($value)
+
+    public function getTracks()
     {
-        return $this->createQueryBuilder('m')
-            ->where('m.something = :value')->setParameter('value', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('t')
+            ->getQuery();
     }
-    */
 }

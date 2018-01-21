@@ -17,9 +17,9 @@ class TracksController extends Controller
     {
         $doctrine = $this->getDoctrine();
         $request = Request::createFromGlobals();
+        $em = $doctrine->getManager();
         if ($request->isMethod('POST')) {
             $params = $request->request->all();
-            $em = $doctrine->getManager();
             $tracks = new Tracks();
             if ($params) {
                 $tracks->setPerformer($params['performer']);
@@ -43,12 +43,26 @@ class TracksController extends Controller
                 return $this->json($result);
             }
         }
+        $paginate = $doctrine->getRepository(Tracks::class)->getTracks();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $paginate,
+            $request->query->getInt('page',1),
+            10
+        );
+        if ($request->isXmlHttpRequest() && $request->isMethod('GET')) {
+            return $this->render('tracks/pagination.html.twig', [
+               'pagination' => $pagination
+            ]);
+        }
+//        dump($pagination); die;
         $tracks = $doctrine
             ->getRepository(Tracks::class)
             ->findAll();
 
         return $this->render('tracks/list.html.twig', [
-            'tracks' => $tracks
+            'tracks' => $tracks,
+            'pagination' => $pagination
         ]);
     }
 
