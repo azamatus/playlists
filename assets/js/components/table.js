@@ -60,7 +60,7 @@ export default class Table extends Component {
     openRemoveModal(e) {
         const el = $(e.target);
         this.setState({
-           trackId: el.data('id')
+           trackId: el.attr('data-id')
         });
     }
 
