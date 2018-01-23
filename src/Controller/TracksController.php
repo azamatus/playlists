@@ -50,12 +50,6 @@ class TracksController extends Controller
             $request->query->getInt('page',1),
             10
         );
-        if ($request->isXmlHttpRequest() && $request->isMethod('GET')) {
-            return $this->render('tracks/pagination.html.twig', [
-               'pagination' => $pagination
-            ]);
-        }
-//        dump($pagination); die;
         $tracks = $doctrine
             ->getRepository(Tracks::class)
             ->findAll();
